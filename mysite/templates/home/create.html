@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Добавлениея{% endblock title %}
+
+{% block content %}
+<div class="main-box containner text-center mt-4">
+    <h2>Добавлениея</h2>
+    <hr>
+    <div style="text-align: left">
+        <form method="post" action="/create" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="'form_template">
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        <div>{{ field }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            <p style="margin-top: 20px">
+                <input id="b1" type="submit" value="Отправить" class="btn btn-success">
+                <input id="b2" type="reset" value="Очистить" class="btn btn-danger">
+            </p>
+        </form>
+    </div>
+    <a href="/">Вернутся к новостям</a>
+</div>
+<style>
+    .form-group input {
+        width: 50%;
+        height: 30px;
+    }
+    .form-group textarea {
+        width: 50%;
+    }
+    #b1, #b2 {
+        width: 50%;
+    }
+</style>
+{% endblock content %}

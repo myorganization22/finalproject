@@ -1,7 +1,77 @@
 {% extends 'layouts/base.html' %}
+
+{% block title %}Лента{% endblock title %}
+
 {% block content %}
-{% load static %}
+<div class="main-box containner text-center mt-4">
+    <hr>
+    {% if user.username == 'Date44' %}
+        <a href="/create">Добавить новость</a>
+    {% endif %}
+    <table class="news" border="1">
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>About</th>
+            <th>Published</th>
+            <th>Manage</th>
+        </tr>
+        {% for post in page_obj %}
+            <tr>
+                <td>
+                    <img src="/media/{{ post.image }}" alt="" class="mini">
+                </td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.about }}</td>
+                <td>{{ post.published }}</td>
+                <td>
+                    <a href="/details/{{ post.id }}" class="btn btn-sm btn-primary my-btn">Details</a>
+                    {% if user.username == 'Date44' %}
+                        <a href="/edit/{{ post.id }}" class="btn btn-sm btn-success my-btn">Edit</a>
+                        <a href="/delete/{{ post.id }}" class="btn btn-sm btn-danger my-btn">Delete</a>
+                    {% endif %}
+                </td>
+            </tr>
 
+        {% endfor %}
+    </table>
+    <div class="paginator" style="margin-top: 20px">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
 
-
-{% endblock %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+<style>
+    .my-btn {
+        width: 70px;
+    }
+    .mini {
+        width: 100px;
+        height: 80px;
+    }
+    .news {
+        width: 100%;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+    .news th,
+    .news td {
+        padding: 5px;
+        border: 1px solid silver;
+    }
+    .news th {
+        background-color: lightgray;
+    }
+</style>
+{% endblock content %}

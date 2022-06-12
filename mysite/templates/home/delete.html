@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Удаление{% endblock title %}
+
+{% block content %}
+<div class="main-box containner text-center mt-4">
+    <h4>Вы собираетесь удалить пост:</h4>
+    <h3>
+        {{ post.title }} / {{ post.author }} / {{ post.published }}
+    </h3>
+    <h4>Подтвердите удаления</h4>
+    <form action="/delete/{{ post.id }}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Удалить" class="btn btn-danger" style="width: 200px">
+    </form>
+    <a href="/">Вернутся к ленте новостей</a>
+</div>
+{% endblock content %}

@@ -63,12 +63,12 @@ def sign_in(request):
             return render(request, 'account/report.html', context=data)
         else:
             login(request, user)
-            return redirect('/home')
+            return redirect('/')
 
 
 def sign_out(request):
     logout(request)
-    return redirect('/home')
+    return redirect('/')
 
 
 def profile(request):

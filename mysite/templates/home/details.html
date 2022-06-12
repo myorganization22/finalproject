@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Детали{% endblock title %}
+
+{% block content %}
+<div class="main-box containner text-center mt-4">
+    <h2>Детали</h2>
+    <hr>
+    <div style="text-align: left">
+        <img src="/media/{{ post.image }}" alt="" align="left"  class="image">
+        <h3 style="margin-top: 30px">{{ post.title }}</h3>
+        <h5>{{ post.published }} => {{ post.author }}</h5>
+        <h5>{{ post.about }}</h5>
+        <h4>{{ post.content }}</h4>
+        <h6>
+            <a target="_blank" href="{{ post.source }}">{{ post.source }}</a>
+        </h6>
+        <div style="clear: left">
+            <a href="/">Вернутся к списку новостей</a>
+        </div>
+    </div>
+</div>
+<style>
+    .image {
+        width: 30%;
+        margin-right: 50px;
+    }
+</style>
+{% endblock content %}
